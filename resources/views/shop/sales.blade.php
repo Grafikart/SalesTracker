@@ -2,7 +2,7 @@
 
 @section("body")
 
-    <main>
+    <main class="pb-16">
 
         <a href="{{ route('sale.download') }}" class="p-4 flex justify-center w-full gap-2 border-b border-b-slate-200 bg-slate-50 text-lg items-center">
                 Télécharger l'activité
