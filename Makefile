@@ -11,7 +11,7 @@ deploy:
 	rsync -avH ./database/database.sqlite -e ssh $(server):~/sites/$(domain)/database/database.sqlite
 	ssh -A $(server) 'cd ~/sites/$(domain) && git pull origin main && make install'
 
-install: vendor/autoload.php public/assets/.vite/manifest.json ## Installe les différentes dépendances
+install: vendor/autoload.php ## Installe les différentes dépendances
 	composer install --no-dev --optimize-autoloader
 	php artisan cache:clear
 
