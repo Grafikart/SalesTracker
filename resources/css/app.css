@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@source "../views/**/*.blade.php";
+
+@custom-variant hidden (&[hidden]);
+
+#spinner{
+    opacity: 0;
+    transform: translateY(-20px);
+}
+.htmx-request #spinner,
+.htmx-request#spinner{
+    transform: translateY(0px);
+    opacity: 1;
+}
