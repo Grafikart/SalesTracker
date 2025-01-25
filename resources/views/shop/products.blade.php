@@ -13,14 +13,17 @@
                     hx-target="#notification"
                     hx-swap="beforeend"
                     hx-indicator="#spinner"
-                    class="disabled:opacity-30 bg-white cursor-pointer aspect-square border-gray-200 border rounded-xl flex flex-col items-center justify-center gap-4"
+                    class="disabled:opacity-30 py-6 px-4 bg-white cursor-pointer border-gray-200 border rounded-xl flex flex-col items-center justify-between gap-4 duration-300 hover:shadow-md"
                 >
 
-                    <x-dynamic-component :component="sprintf('%s-line', $product->icon)" class="size-16 text-slate-400 block"/>
-
-                    <h2 class="text-xl font-semibold text-slate-700">
+                    <h2 class="text-xl text-slate-900 font-semibold">
                         {{ $product->name }}
                     </h2>
+
+                    <x-dynamic-component :component="sprintf('%s-line', $product->icon)" class="size-16 flex-none text-slate-400 block"/>
+
+                    <div class="self-end text-orange-400 font-semibold"><span class="text-3xl leading-none">{{ $product->price / 100 }}</span> €</div>
+
 
                 </button>
             @endforeach
