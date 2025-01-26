@@ -8,7 +8,7 @@ seed:
 
 deploy:
 	bun run build
-	rsync -avH ./database/database.sqlite -e ssh $(server):~/sites/$(domain)/database/database.sqlite
+	rsync -avH ./public/build/ -e ssh $(server):~/sites/$(domain)/public/build/
 	ssh -A $(server) 'cd ~/sites/$(domain) && git pull origin main && make install'
 
 install: vendor/autoload.php ## Installe les différentes dépendances
