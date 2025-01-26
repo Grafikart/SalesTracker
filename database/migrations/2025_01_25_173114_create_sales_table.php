@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('author');
             $table->foreignIdFor(\App\Models\Product::class);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

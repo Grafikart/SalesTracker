@@ -7,7 +7,7 @@
     --shadow-*: initial;
     --color-*: initial;
     --color-orange: #fea079;
-    --color-black: #000;
+    --color-dark: #000;
     --color-gray: --alpha(#000 / 70%);
     --color-white: #FFF;
     --color-green: #91ed91;
@@ -17,14 +17,25 @@
 
 @custom-variant hidden (&[hidden]);
 
+@custom-variant from {
+    &[data-leaving] {
+        @slot;
+    }
+    @starting-style {
+        & {
+            @slot;
+        }
+    }
+}
+
 @utility card {
-    border: solid 2px var(--color-black);
+    border: solid 2px var(--color-dark);
     border-radius: 14px;
     background-color: var(--color-white);
-    box-shadow: 3px 3px 0px 1px var(--color-black);
+    box-shadow: 3px 3px 0px 1px var(--color-dark);
     transition: .3s;
     @variant hover {
-        box-shadow: 5px 5px 0px 1px var(--color-black);
+        box-shadow: 5px 5px 0px 1px var(--color-dark);
         background-color: #efefef;
     }
 }
@@ -38,7 +49,7 @@
     @variant hover {
         background-color: --alpha(#FFF / 20%);
         transform: translate(-1px,-1px);
-        box-shadow: 2px 2px 0px 1px var(--color-black);
+        box-shadow: 2px 2px 0px 1px var(--color-dark);
     }
 }
 
@@ -55,4 +66,10 @@ body {
 .htmx-request#spinner{
     transform: translateY(0px);
     opacity: 1;
+}
+
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 0.5s;
 }

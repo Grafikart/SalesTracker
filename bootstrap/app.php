@@ -11,6 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->remove(\Illuminate\Session\Middleware\AuthenticateSession::class);
+        $middleware->remove(\Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class);
+        $middleware->append(\App\Http\Middlewares\HtmxMiddleware::class);
         $middleware->validateCsrfTokens(except: [
             '*',
         ]);

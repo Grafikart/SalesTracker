@@ -67,6 +67,7 @@ class AuthService
         'perroquet',
         'canari',
         'poisson',
+        'corgi',
 
         // Animaux de la ferme
         'cheval',

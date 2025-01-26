@@ -10,8 +10,7 @@
                     hx-disabled-elt="this"
                     hx-post="{{ route('sale.store', ['product' => $product->id]) }}"
                     hx-trigger="click"
-                    hx-target="#notification"
-                    hx-swap="beforeend"
+                    hx-swap="none"
                     hx-indicator="#spinner"
                     class="disabled:opacity-30 py-6 px-4 cursor-pointer card flex flex-col items-center justify-between gap-4"
                 >
@@ -20,7 +19,7 @@
                         {!! str_replace(['(', ')'], ['<br/><span class="text-xs text-gray">', '</span>'], $product->name) !!}
                     </h2>
 
-                    <x-dynamic-component :component="sprintf('%s-line', $product->icon)" class="size-16 flex-none block"/>
+                    <x-dynamic-component :component="sprintf('icon.%s', $product->icon)" class="size-16 flex-none block"/>
 
                     <div class="self-end text-orange font-semibold"><span class="text-3xl leading-none">{{ $product->price / 100 }}</span> €</div>
 

@@ -26,12 +26,12 @@ class ProductSeeder extends Seeder
             [
                 'name' => 'Jus',
                 'price' => 400,
-                'icon' => 'drinks-2',
+                'icon' => 'drink',
             ],
             [
                 'name' => 'Gateau',
                 'price' => 300,
-                'icon' => 'cake-3',
+                'icon' => 'cake',
             ],
             [
                 'name' => 'Sandwich',

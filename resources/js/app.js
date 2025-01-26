@@ -1,14 +1,16 @@
 import '../css/app.css';
 import htmx from 'htmx.org';
 
+htmx.config.allowNestedOobSwaps = false;
+
 function maybeRemoveMe(elt) {
     const timing = elt.getAttribute('remove-me') || elt.getAttribute('data-remove-me')
     if (timing) {
         setTimeout(function() {
-            elt.setAttribute('hidden', 'until-found')
+            elt.setAttribute('data-leaving', 'leaving')
             setTimeout(() => {
                 elt.parentElement.removeChild(elt)
-            }, 5000)
+            }, 1000)
         }, htmx.parseInterval(timing))
     }
 }
@@ -21,7 +23,7 @@ htmx.defineExtension('remove-me', {
                 maybeRemoveMe(elt)
                 if (elt.querySelectorAll) {
                     const children = elt.querySelectorAll('[remove-me], [data-remove-me]')
-                    for (const i = 0; i < children.length; i++) {
+                    for (let i = 0; i < children.length; i++) {
                         maybeRemoveMe(children[i])
                     }
                 }

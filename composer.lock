@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f994736a0f12f84bcdb370a811244085",
+    "content-hash": "8a4fedbc7704a0b45660bd535ebdd786",
     "packages": [
         {
             "name": "brick/math",
@@ -6155,6 +6155,72 @@
                 "source": "https://github.com/hamcrest/hamcrest-php/tree/v2.0.1"
             },
             "time": "2020-07-09T08:09:16+00:00"
+        },
+        {
+            "name": "ion-bazan/laravel-container-debug",
+            "version": "v1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/IonBazan/laravel-container-debug.git",
+                "reference": "803cbbbb6b3f858d34cde58f3424461eb125f10f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/IonBazan/laravel-container-debug/zipball/803cbbbb6b3f858d34cde58f3424461eb125f10f",
+                "reference": "803cbbbb6b3f858d34cde58f3424461eb125f10f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/console": "^5.4 || ^6 || ^7 || ^8 || ^9 || ^10 || ^11",
+                "illuminate/container": "^5.4 || ^6 || ^7 || ^8 || ^9 || ^10 || ^11",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "^4.4 || ^5 || ^6"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "IonBazan\\Laravel\\ContainerDebug\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "IonBazan\\Laravel\\ContainerDebug\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ion Bazan",
+                    "email": "ion.bazan@gmail.com"
+                }
+            ],
+            "description": "Lists available services in Laravel IoC Container. Works with Laravel 5.4-10.x",
+            "keywords": [
+                "command",
+                "container",
+                "debug",
+                "laravel",
+                "services"
+            ],
+            "support": {
+                "issues": "https://github.com/IonBazan/laravel-container-debug/issues",
+                "source": "https://github.com/IonBazan/laravel-container-debug/tree/v1.5.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/IonBazan",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-04-14T14:51:22+00:00"
         },
         {
             "name": "laravel/pail",
