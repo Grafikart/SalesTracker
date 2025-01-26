@@ -20,7 +20,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'name' => 'Bière (Pinte / 50cl)',
-                'price' => 400,
+                'price' => 650,
                 'icon' => 'beer',
             ],
             [
