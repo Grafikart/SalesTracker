@@ -10,8 +10,11 @@ use Illuminate\View\View;
 class AuthController
 {
 
-    public function login (): View
+    public function login (Request $request): View|RedirectResponse
     {
+        if ($request->user()) {
+            return to_route('home');
+        }
         return view('auth.login');
     }
 
