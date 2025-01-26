@@ -12,20 +12,26 @@
     <div class="font-bold text-right text-red">{{ $sale->product->price / 100 }} €</div>
     <div class="text-gray text-right whitespace-nowrap overflow-hidden text-ellipsis">{{ $sale->author }}</div>
     <div>{{ $sale->created_at->isoFormat('HH:mm') }}</div>
-    @if($sale->trashed())
-        <button
-            hx-disabled-elt="this"
-            hx-post="{{ route('sale.restore', ['sale' => $sale->id]) }}"
-            hx-indicator="#spinner"
-            class="flex self-stretch items-center border-l-1 border-l-dark justify-center -my-4 -mr-4 disabled:opacity-30">
-            <x-icon.undo class="size-5"/>
-        </button>
+    @can('delete', $sale)
+        @if($sale->trashed())
+            <button
+                hx-disabled-elt="this"
+                hx-post="{{ route('sale.restore', ['sale' => $sale->id]) }}"
+                hx-indicator="#spinner"
+                class="cursor-pointer flex self-stretch items-center border-l-1 border-l-dark justify-center -my-4 -mr-4 disabled:opacity-30">
+                <x-icon.undo class="size-5"/>
+            </button>
+        @else
+            <button
+                hx-disabled-elt="this"
+                hx-delete="{{ route('sale.show', ['sale' => $sale->id]) }}"
+                hx-indicator="#spinner"
+                class="cursor-pointer flex self-stretch items-center border-l-1 border-l-dark justify-center -my-4 -mr-4 disabled:opacity-30">
+                <x-icon.trash class="size-5"/>
+            </button>
+        @endif
     @else
-        <button
-            hx-disabled-elt="this"
-            hx-delete="{{ route('sale.show', ['sale' => $sale->id]) }}"
-            hx-indicator="#spinner"
-            class="flex self-stretch items-center border-l-1 border-l-dark justify-center -my-4 -mr-4 disabled:opacity-30">
+        <button disabled class="flex self-stretch items-center border-l-1 border-l-dark justify-center -my-4 -mr-4 text-dark/30">
             <x-icon.trash class="size-5"/>
         </button>
     @endif

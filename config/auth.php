@@ -38,7 +38,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'animals',
         ],
     ],
 
@@ -63,6 +63,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
+        ],
+        'animals' => [
+            'driver' => \App\Extensions\AnimalsUserProvider::class,
+            'password' => env('APP_PASSWORD', null)
         ],
 
         // 'users' => [

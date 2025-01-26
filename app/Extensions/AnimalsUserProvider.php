@@ -1,13 +1,14 @@
 <?php
 
-namespace App;
+namespace App\Extensions;
 
 use App\Models\User;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
 
-class AuthService
+class AnimalsUserProvider implements UserProvider
 {
 
     private static $adjectives = [
@@ -63,7 +64,7 @@ class AuthService
         'chien',
         'lapin',
         'hamster',
-        "octodon",
+        'octodon',
         'perroquet',
         'canari',
         'poisson',
@@ -115,26 +116,46 @@ class AuthService
         'wallaby'
     ];
 
-    private static ?User $user = null;
+    public function __construct(private string $password) {
 
-    private const COOKIE_NAME = 'username';
-
-    public static function getUser (): User {
-        if (self::$user) {
-            return self::$user;
-        }
-
-        $username = Cookie::get(self::COOKIE_NAME);
-        if (!$username) {
-            $username = sprintf('%s %s',
-                Str::ucfirst(Arr::random(self::$animals)),
-                Arr::random(self::$adjectives)
-            );
-            Cookie::queue(self::COOKIE_NAME, $username, 6000);
-        }
-
-        self::$user = new User($username);
-        return self::$user;
     }
 
+    public static function randomAnimal(): string {
+        return sprintf('%s %s',
+            Str::ucfirst(Arr::random(self::$animals)),
+            Arr::random(self::$adjectives)
+        );
+    }
+
+    public function retrieveById($identifier)
+    {
+        return new User($identifier);
+    }
+
+    public function retrieveByToken($identifier, #[\SensitiveParameter] $token): null
+    {
+        return new User($token);
+    }
+
+    public function updateRememberToken(Authenticatable $user, #[\SensitiveParameter] $token): void
+    {
+    }
+
+    public function retrieveByCredentials(#[\SensitiveParameter] array $credentials): ?User
+    {
+        if ($credentials['password'] !== $this->password) {
+            return null;
+        }
+        return new User(self::randomAnimal());
+    }
+
+    public function validateCredentials(Authenticatable $user, #[\SensitiveParameter] array $credentials): bool
+    {
+        return true;
+    }
+
+    public function rehashPasswordIfRequired(Authenticatable $user, #[\SensitiveParameter] array $credentials, bool $force = false)
+    {
+        // TODO: Implement rehashPasswordIfRequired() method.
+    }
 }

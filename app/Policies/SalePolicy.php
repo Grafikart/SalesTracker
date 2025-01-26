@@ -8,13 +8,6 @@ use Carbon\CarbonImmutable;
 
 class SalePolicy
 {
-    /**
-     * Create a new policy instance.
-     */
-    public function __construct()
-    {
-        //
-    }
 
     public function cancel(User $user, Sale $sale)
     {

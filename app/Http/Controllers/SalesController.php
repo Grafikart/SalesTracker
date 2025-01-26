@@ -7,6 +7,7 @@ use App\Models\Sale;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 use League\Csv\Writer;
 
@@ -31,10 +32,10 @@ class SalesController extends Controller
     /**
      * Crée une nouvelle vente
      */
-    public function store(Product $product, User $user): View
+    public function store(Product $product, Request $request): View
     {
         $sale = $product->sale()->create([
-            'author' => $user->username,
+            'author' => $request->user()->username,
         ]);
         return view('parts.alert', [
             'type' => 'success',
@@ -49,57 +50,39 @@ class SalesController extends Controller
     /**
      * Annule une vente
      */
-    public function cancel(Sale $sale, User $user): View
+    public function cancel(Sale $sale): View
     {
-        if ($user->can('cancel', $sale)) {
-            $sale->forceDelete();
-            return view('parts.alert', [
-                'type' => 'success',
-                'message' => 'La vente a bien été annulée',
-            ]);
-        } else {
-            return view('parts.alert', [
-                'type' => 'error',
-                'message' => 'Vous ne pouvez pas annuler cette vente',
-            ]);
-        }
+        Gate::authorize('cancel', $sale);
+        $sale->forceDelete();
+        return view('parts.alert', [
+            'type' => 'success',
+            'message' => 'La vente a bien été annulée',
+        ]);
     }
 
     /**
      * Supprime une vente (soft delete)
      */
-    public function destroy(Sale $sale, User $user): View
+    public function destroy(Sale $sale): View
     {
-        if ($user->can('delete', $sale)) {
-            $sale->delete();
-            return view('shop.sale-item', [
-                'sale' => $sale
-            ]);
-        } else {
-            return view('parts.alert', [
-                'type' => 'error',
-                'message' => 'Vous ne pouvez pas supprimer cette vente',
-            ]);
-        }
+        Gate::authorize('delete', $sale);
+        $sale->delete();
+        return view('shop.sale-item', [
+            'sale' => $sale
+        ]);
     }
 
     /**
      * Restaure une vente
      */
-    public function restore(int $saleId, User $user): View
+    public function restore(int $saleId): View
     {
         $sale = Sale::withTrashed()->findOrFail($saleId);
-        if ($user->can('restore', $sale)) {
-            $sale->restore();
-            return view('shop.sale-item', [
-                'sale' => $sale
-            ]);
-        } else {
-            return view('parts.alert', [
-                'type' => 'error',
-                'message' => 'Vous ne pouvez pas supprimer cette vente',
-            ]);
-        }
+        Gate::authorize('restore', $sale);
+        $sale->restore();
+        return view('shop.sale-item', [
+            'sale' => $sale
+        ]);
     }
 
     /**

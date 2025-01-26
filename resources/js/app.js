@@ -73,3 +73,13 @@ htmx.defineExtension('multi-swap', {
     }
 });
 
+document.body.addEventListener('htmx:beforeOnLoad', function (evt) {
+    console.log(evt.detail)
+    if (evt.detail.xhr.status === 403) {
+        evt.detail.el = null;
+        evt.detail.target = document.createElement('div');
+        evt.detail.shouldSwap = true;
+        evt.detail.successful = false;
+        evt.detail.isError = true;
+    }
+});

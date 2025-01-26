@@ -5,15 +5,11 @@ namespace App\Http\Middlewares;
 use Barryvdh\Debugbar\LaravelDebugbar;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class HtmxMiddleware
 {
 
-    /**
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
         // Disable Laravel debugbar for HTMX requests
         if($request->headers->has('Hx-Request') && app()->has(LaravelDebugbar::class)) {
