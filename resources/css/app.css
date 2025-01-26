@@ -22,10 +22,29 @@
     border-radius: 14px;
     background-color: var(--color-white);
     box-shadow: 3px 3px 0px 1px var(--color-black);
+    transition: .3s;
+    @variant hover {
+        box-shadow: 5px 5px 0px 1px var(--color-black);
+        background-color: #efefef;
+    }
+}
+
+@utility btn {
+    border-radius: 4px;
+    border: solid 2px currentColor;
+    padding: 6px 8px;
+    transition: .3s;
+
+    @variant hover {
+        background-color: --alpha(#FFF / 20%);
+        transform: translate(-1px,-1px);
+        box-shadow: 2px 2px 0px 1px var(--color-black);
+    }
 }
 
 body {
     background: url(./wiggles.png);
+    animation: body infinite 5s linear;
 }
 
 #spinner{

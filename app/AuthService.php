@@ -14,12 +14,10 @@ class AuthService
         'beau',
         'joli',
         'grand',
-        'petit',
         'intelligent',
         'rapide',
         'lent',
         'fort',
-        'faible',
         'heureux',
         'triste',
         'sombre',
@@ -65,26 +63,23 @@ class AuthService
         'chien',
         'lapin',
         'hamster',
-        "cochon d'Inde",
+        "octodon",
         'perroquet',
         'canari',
-        'poisson rouge',
+        'poisson',
 
         // Animaux de la ferme
-        'vache',
         'cheval',
         'mouton',
         'cochon',
-        'poule',
         'coq',
         'âne',
-        'chèvre',
+        'bouc',
 
         // Animaux sauvages
         'lion',
         'tigre',
         'éléphant',
-        'girafe',
         'zèbre',
         'rhinocéros',
         'guépard',
@@ -94,7 +89,6 @@ class AuthService
 
         // Animaux marins
         'dauphin',
-        'baleine',
         'requin',
         'orque',
         'phoque',
@@ -104,7 +98,6 @@ class AuthService
         'crocodile',
         'caméléon',
         'toucan',
-        'ara',
 
         // Animaux de la forêt
         'renard',
@@ -115,7 +108,7 @@ class AuthService
 
         // Animaux rares
         'okapi',
-        'manchot empereur',
+        'manchot',
         'ornithorynque',
         'tatou',
         'wallaby'

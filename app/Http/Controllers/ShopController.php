@@ -52,7 +52,7 @@ class ShopController extends Controller
     public function sales() {
         return view('shop.sales', [
             'total' => Sale::leftJoin('products', 'sales.product_id', '=', 'products.id')->sum('products.price'),
-            'sales' => Sale::with('product')->orderBy('id', 'desc')->paginate(50)
+            'sales' => Sale::with('product')->orderBy('id', 'desc')->paginate(5)
         ]);
     }
 

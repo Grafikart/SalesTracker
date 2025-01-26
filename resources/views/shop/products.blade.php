@@ -22,7 +22,7 @@
 
                     <x-dynamic-component :component="sprintf('%s-line', $product->icon)" class="size-16 flex-none block"/>
 
-                    <div class="self-end text-orange-400 font-semibold"><span class="text-3xl leading-none">{{ $product->price / 100 }}</span> €</div>
+                    <div class="self-end text-orange font-semibold"><span class="text-3xl leading-none">{{ $product->price / 100 }}</span> €</div>
 
 
                 </button>

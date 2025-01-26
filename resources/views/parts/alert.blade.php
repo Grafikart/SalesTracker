@@ -11,7 +11,7 @@
         hx-trigger="click"
         hx-target="#notification"
         hx-swap="outerhtml"
-        class="border border-current rounded-sm px-3 py-2">
+        class="btn">
         {{ $action['label'] }}
     </button>
     @endif
