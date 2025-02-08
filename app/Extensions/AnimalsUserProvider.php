@@ -132,7 +132,7 @@ class AnimalsUserProvider implements UserProvider
         return new User($identifier);
     }
 
-    public function retrieveByToken($identifier, #[\SensitiveParameter] $token): null
+    public function retrieveByToken($identifier, #[\SensitiveParameter] $token): User
     {
         return new User($token);
     }

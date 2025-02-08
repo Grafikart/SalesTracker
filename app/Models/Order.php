@@ -5,23 +5,26 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property Carbon created_at
+ * @mixin IdeHelperOrder
  */
-class Sale extends Model
+class Order extends Model
 {
 
     use SoftDeletes;
 
-    public function product(): BelongsTo
+    public function products(): BelongsToMany
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsToMany(Product::class)->withPivot('quantity');
     }
 
     protected $fillable = [
-        'author'
+        'user_id',
+        'price'
     ];
 
 }

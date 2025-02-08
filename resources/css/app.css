@@ -12,23 +12,11 @@
     --color-white: #FFF;
     --color-green: #91ed91;
     --color-red: #ff7a5c;
+    --color-purple: #d3B4FF;
     --color-blue: #88ceeb;
     --color-error: oklch(.577 .245 27.325);
+    --shadow-md: 1px 3px 0px 1px var(--color-dark);
 }
-
-@custom-variant hidden (&[hidden]);
-
-@custom-variant from {
-    &[data-leaving] {
-        @slot;
-    }
-    @starting-style {
-        & {
-            @slot;
-        }
-    }
-}
-
 @utility card {
     border: solid 2px var(--color-dark);
     border-radius: 14px;
@@ -45,12 +33,15 @@
     border-radius: 4px;
     border: solid 2px currentColor;
     padding: 6px 8px;
-    transition: .3s;
+
+    @variant disabled {
+        filter: grayscale(1);
+        color: var(--color-gray);
+    }
 
     @variant hover {
-        background-color: --alpha(#FFF / 20%);
-        transform: translate(-1px,-1px);
-        box-shadow: 2px 2px 0px 1px var(--color-dark);
+        transform: translate(-2px,-2px);
+        box-shadow: 4px 4px 0px 1px var(--color-dark);
     }
 }
 

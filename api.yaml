@@ -1,0 +1,165 @@
+openapi: 3.0.0
+info:
+  title: Orders API
+  version: 1.0.0
+  description: API for managing orders and products
+
+paths:
+  /api/orders:
+    get:
+      summary: Get all orders
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+          required: false
+          description: Page number for pagination
+          example: 1
+        - in: header
+          name: Accept
+          schema:
+            type: string
+          required: true
+          description: Accept header specifying the desired response format
+          example: "application/json"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Order'
+                  links:
+                    $ref: '#/components/schemas/Links'
+
+  /api/orders/{order}:
+    delete:
+      summary: Delete a specific order
+      parameters:
+        - in: path
+          name: order
+          required: true
+          schema:
+            type: integer
+          description: ID of the order to delete
+          example: 1
+        - in: header
+          name: Accept
+          schema:
+            type: string
+          required: true
+          description: Accept header specifying the desired response format
+          example: "application/json"
+      responses:
+        '204':
+          description: Order successfully deleted
+        '404':
+          description: Order not found
+
+components:
+  schemas:
+    Links:
+      type: object
+      properties:
+        first:
+          type: string
+          description: URL of the first page
+          example: "http://localhost:8000/api/orders?page=1"
+        last:
+          type: string
+          description: URL of the last page
+          example: "http://localhost:8000/api/orders?page=4"
+        prev:
+          type: string
+          nullable: true
+          description: URL of the previous page, null if on first page
+          example: null
+        next:
+          type: string
+          nullable: true
+          description: URL of the next page, null if on last page
+          example: "http://localhost:8000/api/orders?page=2"
+    Product:
+      type: object
+      required:
+        - name
+        - icon
+        - quantity
+      properties:
+        name:
+          type: string
+          description: Name of the product
+          example: "Bière (Pinte / 50cl)"
+        icon:
+          type: string
+          description: Icon identifier for the product
+          example: "beer"
+        quantity:
+          type: integer
+          description: Quantity of the product ordered
+          minimum: 1
+          example: 1
+    ProductItem:
+      type: object
+      required:
+        - id
+        - name
+        - price
+        - icon
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          description: Name of the product
+          example: "Bière (Pinte / 50cl)"
+        icon:
+          type: string
+        price:
+          type: integer
+          description: Price (in cents)
+          minimum: 1
+          example: 1
+
+    Order:
+      type: object
+      required:
+        - id
+        - price
+        - trashed
+        - trashable
+        - user
+        - date
+        - products
+      properties:
+        id:
+          type: integer
+        price:
+          type: integer
+          description: Total price of the order in cents
+          example: 650
+        trashed:
+          type: boolean
+        trashable:
+          type: boolean
+        user:
+          type: string
+          description: Name of the user who placed the order
+          example: "Panda ancien"
+        date:
+          type: string
+          format: date-time
+          description: Timestamp of when the order was placed
+          example: "2025-02-08T20:22:15.000000Z"
+        products:
+          type: array
+          description: List of products in the order
+          items:
+            $ref: '#/components/schemas/Product'
