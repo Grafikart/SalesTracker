@@ -14,8 +14,11 @@ export function OrdersPage() {
             queryFn: ({ pageParam, signal }) => {
                 return getApiOrders({ page: pageParam }, { signal });
             },
-            getNextPageParam: (page) => {
-                return parseInt(page.links?.next?.split("=")[1]!, 10) ?? null;
+            getNextPageParam: (page, pages) => {
+                if (!page.links?.next) {
+                    return undefined;
+                }
+                return pages.length + 1;
             },
             initialPageParam: 1,
         });
