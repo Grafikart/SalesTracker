@@ -29,8 +29,8 @@ export function OrderRow({ order }: { order: Order }) {
     return (
         <div
             className={clsx([
-                "grid gap-3 p-4 grid-cols-[1fr_90px_100px_40px_40px] text-dark items-center",
-                trashed && "line-through *:opacity-40",
+                "grid gap-3 p-4 grid-cols-[1fr_120px_40px] text-dark items-center",
+                trashed && "line-through *:opacity-40 bg-gray/10",
             ])}
         >
             {isPending && (
@@ -45,16 +45,22 @@ export function OrderRow({ order }: { order: Order }) {
                 dangerouslySetInnerHTML={{
                     __html: order.products
                         .map((p) => productName(p.name))
-                        .join(", "),
+                        .join("<br/>"),
                 }}
             ></div>
-            <div className="font-bold text-right text-red">
-                {priceFormat(order.price / 100)}
+            <div>
+                <div className="text-gray text-right whitespace-nowrap overflow-hidden text-ellipsis text-sm">
+                    {order.user}
+                </div>
+                <div className="flex justify-end gap-2">
+                    <div className="font-bold text-right text-red">
+                        {priceFormat(order.price / 100)}
+                    </div>
+                    <div className="whitespace-nowrap">
+                        à {hourFormat(order.date)}
+                    </div>
+                </div>
             </div>
-            <div className="text-gray text-right whitespace-nowrap overflow-hidden text-ellipsis">
-                {order.user}
-            </div>
-            <div>{hourFormat(order.date)}</div>
             <button
                 onClick={trash}
                 disabled={order.trashable || isPending}
