@@ -18,10 +18,10 @@ deploy: ## Deploy the site remotely
 	rsync -avH ./public/build/ -e ssh $(server):~/sites/$(domain)/public/build/
 	ssh -A $(server) 'cd ~/sites/$(domain) && git pull origin main && make install'
 
-install: vendor/autoload.php ## Installe les différentes dépendances
+install: ## Installe les différentes dépendances
 	/opt/php8.4/bin/composer install --no-dev --optimize-autoloader
 	/opt/php8.4/bin/php artisan cache:clear
 
 vendor/autoload.php: composer.lock
-	composer install
+	composer install --no-dev --optimize-autoloader
 	touch vendor/autoload.php
