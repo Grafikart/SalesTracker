@@ -18,20 +18,26 @@ export function HomePage() {
     return (
         <main>
             <OrderDetail items={items} onRemove={removeProduct} total={total} />
-            <section
-                className="p-4 grid gap-4"
-                style={{
-                    gridTemplateColumns: "repeat(auto-fit,minmax(170px,1fr))",
-                }}
-            >
-                {window.products.map((product) => (
-                    <ProductCard
-                        product={product}
-                        key={product.id}
-                        onClick={addProduct}
-                    />
-                ))}
-            </section>
+            {Object.keys(window.categories).map((category) => (
+                <div key={category} className="mx-4 my-6 space-y-2">
+                    <h2 className="text-2xl font-bold">{category}</h2>
+                    <section
+                        className="grid gap-4"
+                        style={{
+                            gridTemplateColumns:
+                                "repeat(auto-fill,minmax(170px,1fr))",
+                        }}
+                    >
+                        {window.categories[category].map((product) => (
+                            <ProductCard
+                                product={product}
+                                key={product.id}
+                                onClick={addProduct}
+                            />
+                        ))}
+                    </section>
+                </div>
+            ))}
             <AnimatePresence>
                 {items.length > 0 && (
                     <motion.button

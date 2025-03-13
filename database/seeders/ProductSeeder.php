@@ -14,29 +14,64 @@ class ProductSeeder extends Seeder
     {
         Product::insert([
             [
-                'name' => 'Bière (Demi / 25cl)',
-                'price' => 400,
-                'icon' => 'beer',
+                'name' => 'Thé/Café',
+                'price' => 50,
+                'icon' => 'tea',
+                'category' => 'Boissons',
             ],
             [
-                'name' => 'Bière (Pinte / 50cl)',
-                'price' => 650,
-                'icon' => 'beer',
+                'name' => 'Soda',
+                'price' => 150,
+                'icon' => 'soda',
+                'category' => 'Boissons',
             ],
             [
-                'name' => 'Jus',
-                'price' => 400,
-                'icon' => 'drink',
+                'name' => 'Barre de céréales',
+                'price' => 100,
+                'icon' => 'bar',
+                'category' => 'Sucrée',
             ],
             [
-                'name' => 'Gateau',
-                'price' => 300,
+                'name' => 'Bonbons',
+                'price' => 100,
+                'icon' => 'candy',
+                'category' => 'Sucrée',
+            ],
+            [
+                'name' => 'Sirop à l\'eau',
+                'price' => 50,
+                'icon' => 'syrup',
+                'category' => 'Boissons',
+            ],
+            [
+                'name' => 'Crêpes',
+                'price' => 100,
+                'icon' => 'pancake',
+                'category' => 'Sucrée',
+            ],
+            [
+                'name' => 'Gâteaux maison',
+                'price' => 150,
                 'icon' => 'cake',
+                'category' => 'Sucrée',
             ],
             [
-                'name' => 'Sandwich',
-                'price' => 500,
-                'icon' => 'bread',
+                'name' => 'Snacks salés (quiche, cake)',
+                'price' => 150,
+                'icon' => 'snack',
+                'category' => 'Salé',
+            ],
+            [
+                'name' => 'Chips',
+                'price' => 100,
+                'icon' => 'chips',
+                'category' => 'Salé',
+            ],
+            [
+                'name' => 'Bière (25cl)',
+                'price' => 300,
+                'icon' => 'beer',
+                'category' => 'Boissons',
             ],
         ]);
     }

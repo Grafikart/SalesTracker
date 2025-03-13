@@ -1,11 +1,13 @@
 interface Window {
     username: string;
-    products: {
-        id: number;
-        price: number;
-        name: string;
-        icon: string;
-    }[];
+    categories: {
+        [name: string]: {
+            id: number;
+            price: number;
+            name: string;
+            icon: string;
+        }[];
+    };
 }
 
 declare module "*.css" {

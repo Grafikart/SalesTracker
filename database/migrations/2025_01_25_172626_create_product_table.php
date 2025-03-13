@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('price');
             $table->string('name');
+            $table->string('category');
             $table->string('icon');
         });
     }

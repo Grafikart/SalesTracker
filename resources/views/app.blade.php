@@ -10,7 +10,7 @@
     <link href="https://fonts.bunny.net/css?family=syne:400,500,600&display=swap" rel="stylesheet"/>
     <script>
         window.username = "{{ Auth::user()->username }}";
-        window.products = {!! \App\Models\Product::all()->toJson() !!};
+        window.categories = {!! \App\Models\Product::all()->groupBy('category')->toJson() !!};
     </script>
     @viteReactRefresh
     @vite(['resources/js/app.tsx'])
