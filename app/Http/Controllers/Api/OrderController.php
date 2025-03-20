@@ -71,15 +71,35 @@ class OrderController extends Controller
     public function download(): Response
     {
         $csv = Writer::createFromPath('php://temp', 'r+');
-        $orders = Order::with('products')
-            ->get()
-            ->map(fn(Order $order) => [
-                'produits' => $order->products->map(fn (Product $product) => $product->name)->join(', '),
-                'price' => $order->price / 100,
-                'date' => $order->created_at,
-            ])
-            ->all();
-        $csv->insertAll($orders);
+        $products = \DB::table('order_product')
+            ->join('products', 'order_product.product_id', '=', 'products.id')
+            ->selectRaw(<<<SQL
+            SUM(products.price * order_product.quantity) as total,
+            products.name as name,
+            products.price as price,
+            SUM(order_product.quantity) as quantity
+            SQL
+            )
+            ->groupBy('products.name')
+            ->get();
+        $csv->insertOne([
+            'name' => 'Nom',
+            'price' => 'Prix unitaire',
+            'quantity' => 'Quantité',
+            'total' => 'Total',
+        ]);
+        $csv->insertAll($products->map(fn($product) => [
+            'name' => $product->name,
+            'price' => $product->price / 100,
+            'quantity' => $product->quantity,
+            'total' => $product->total / 100,
+        ]));
+        $csv->insertOne([
+            'name' => 'Total',
+            'price' => null,
+            'quantity' => $products->sum('quantity'),
+            'total' => $products->sum('total') / 100,
+        ]);
         return new Response($csv->toString(), 200, [
             'Content-Encoding' => 'none',
             'Content-Type' => 'text/csv; charset=UTF-8',
