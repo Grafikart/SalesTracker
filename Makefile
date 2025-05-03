@@ -18,7 +18,7 @@ deploy: ## Deploy the site remotely
 	rsync -avH ./public/build/ -e ssh $(server):~/sites/$(domain)/public/build/
 	ssh -A $(server) 'cd ~/sites/$(domain) && git pull origin main && make install'
 
-install: ## Installe les différentes dépendances
+install: ## Install the project (on infomaniak)
 	/opt/php8.4/bin/composer install --no-dev --optimize-autoloader
 	/opt/php8.4/bin/php artisan cache:clear
 
